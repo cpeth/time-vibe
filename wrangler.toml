@@ -1,0 +1,7 @@
+name = "year-clock"
+pages_build_output_dir = "./dist/client"
+compatibility_date = "2026-08-03"
+
+[[kv_namespaces]]
+binding = "YEAR_CLOCK_KV"
+id = "301e1aa0ea354f469bedf4e0afe174a8"

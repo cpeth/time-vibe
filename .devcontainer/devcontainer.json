@@ -1,0 +1,44 @@
+{
+  "name": "Year Clock",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "remoteUser": "node",
+  "updateRemoteUserUID": true,
+  "containerEnv": {
+    "TZ": "America/Los_Angeles"
+  },
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-npm-cache,target=/home/node/.npm,type=volume"
+  ],
+  "forwardPorts": [5173, 8788],
+  "portsAttributes": {
+    "5173": {
+      "label": "Vite / Cloudflare app",
+      "onAutoForward": "notify"
+    },
+    "8788": {
+      "label": "Wrangler Pages",
+      "onAutoForward": "silent"
+    }
+  },
+  "postCreateCommand": "if [ -f package-lock.json ]; then npm ci; elif [ -f package.json ]; then npm install; else echo 'No package.json yet; skipping dependency install.'; fi",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "vitest.explorer"
+      ],
+      "settings": {
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "16gb"
+  },
+  "runArgs": ["--init"],
+  "shutdownAction": "stopContainer"
+}

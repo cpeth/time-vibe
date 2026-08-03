@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "year-clock",
+  "compatibility_date": "2026-08-03",
+  "main": "./src/worker.ts",
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "YEAR_CLOCK_KV",
+      "id": "301e1aa0ea354f469bedf4e0afe174a8",
+      "preview_id": "301e1aa0ea354f469bedf4e0afe174a8"
+    }
+  ]
+}

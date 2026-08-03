@@ -1,0 +1,1122 @@
+:root {
+  font-family: 'Space Grotesk Variable', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+button,
+[role='button'] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+  position: relative;
+  isolation: isolate;
+  min-height: 100dvh;
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--background);
+  font-family: var(--body-font);
+  transition: color 320ms ease, background-color 320ms ease;
+}
+
+.backdrop-canvas,
+.ambient-grade {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.backdrop-canvas {
+  z-index: -3;
+}
+
+.ambient-grade {
+  z-index: -2;
+  background:
+    linear-gradient(128deg, color-mix(in srgb, var(--ambient) 14%, transparent), transparent 44%),
+    linear-gradient(310deg, color-mix(in srgb, var(--accent-alt) 7%, transparent), transparent 52%);
+  opacity: 0.72;
+  transition: background 450ms ease;
+}
+
+.theme-editorial .ambient-grade {
+  display: none;
+}
+
+.theme-editorial .ambience-canvas {
+  display: none;
+}
+
+.topbar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100%, 1560px);
+  margin: 0 auto;
+  padding: 22px 32px 12px;
+}
+
+.brand {
+  display: grid;
+  gap: 1px;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.brand__name {
+  font-family: var(--display-font);
+  font-size: 28px;
+  font-weight: 360;
+  line-height: 0.95;
+}
+
+.brand__name strong {
+  color: var(--accent);
+  font-weight: 760;
+}
+
+.brand__line {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.controls,
+.year-control,
+.segmented-control,
+.theme-switcher {
+  display: flex;
+  align-items: center;
+}
+
+.controls {
+  gap: 10px;
+}
+
+.year-control,
+.segmented-control,
+.theme-switcher {
+  min-height: 36px;
+  padding: 3px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 43%, transparent);
+  border-radius: 6px;
+  backdrop-filter: blur(12px);
+}
+
+.year-control__value {
+  min-width: 50px;
+  color: var(--ink);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  text-align: center;
+}
+
+.icon-button,
+.segmented-control button,
+.theme-swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color 150ms ease, background-color 150ms ease, transform 150ms ease;
+}
+
+.icon-button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+
+.controls > .icon-button {
+  border-color: color-mix(in srgb, var(--line) 43%, transparent);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.icon-button:hover,
+.segmented-control button:hover,
+.icon-button:focus-visible,
+.segmented-control button:focus-visible {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  outline: none;
+}
+
+.segmented-control button {
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.segmented-control button[aria-pressed='true'] {
+  color: var(--background);
+  background: var(--ink);
+}
+
+.segmented-control button:disabled,
+.time-lapse-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+.theme-switcher {
+  gap: 4px;
+  padding-inline: 7px;
+}
+
+.theme-swatch {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+.theme-swatch::before {
+  width: 12px;
+  height: 12px;
+  content: '';
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24);
+}
+
+.theme-swatch--observatory::before {
+  background: conic-gradient(#071416 0 33%, #d8b96a 33% 66%, #8ac1ca 66%);
+}
+
+.theme-swatch--editorial::before {
+  background: conic-gradient(#f4f3ef 0 33%, #d43d32 33% 66%, #137b77 66%);
+}
+
+.theme-swatch--almanac::before {
+  background: conic-gradient(#e9e6d7 0 33%, #c83f49 33% 66%, #167984 66%);
+}
+
+.theme-swatch[aria-pressed='true'] {
+  border-color: var(--accent);
+}
+
+.theme-swatch:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.instrument-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(540px, 1fr) 330px;
+  gap: 28px;
+  align-items: center;
+  width: min(calc(100% - 48px), 1480px);
+  min-height: calc(100dvh - 132px);
+  margin: 0 auto;
+  padding: 4px 0 24px;
+}
+
+.dial-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.dial-caption,
+.dial-key {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100%, 840px);
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 650;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.dial-caption {
+  padding: 0 24px 3px;
+}
+
+.source-status {
+  padding: 2px 5px;
+  color: var(--muted);
+  border: 1px solid color-mix(in srgb, var(--line) 45%, transparent);
+  border-radius: 3px;
+}
+
+.source-status--live {
+  color: var(--accent-alt);
+}
+
+.dial-frame {
+  width: min(100%, 840px, calc(100dvh - 150px));
+  min-width: 360px;
+  aspect-ratio: 1;
+  animation: dial-arrive 850ms cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.dial-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+}
+
+.dial-frame.is-switching .dial-stage {
+  animation: dial-reconfigure 1.4s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+
+.climate-field,
+.dial-svg,
+.ambience-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.climate-field {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dial-svg {
+  z-index: 2;
+  overflow: visible;
+  touch-action: none;
+  user-select: none;
+}
+
+.ambience-canvas {
+  z-index: 3;
+  pointer-events: none;
+}
+
+.dial-bed {
+  fill: color-mix(in srgb, var(--surface) 66%, transparent);
+  stroke: color-mix(in srgb, var(--line) 34%, transparent);
+  stroke-width: 0.8;
+}
+
+.theme-observatory .dial-bed {
+  fill: rgba(7, 20, 22, 0.48);
+}
+
+.theme-editorial .dial-bed {
+  fill: rgba(255, 255, 255, 0.74);
+}
+
+.theme-almanac .dial-bed {
+  fill: rgba(246, 241, 220, 0.58);
+}
+
+.dial-outer-rule {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 56%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 1 7;
+}
+
+.month-ring__rail {
+  fill: none;
+  stroke: color-mix(in srgb, var(--line) 30%, transparent);
+  stroke-width: 24;
+}
+
+.day-tick {
+  stroke: var(--ink);
+  stroke-width: 0.65;
+  opacity: 0.29;
+}
+
+.day-tick--month {
+  stroke: var(--accent);
+  stroke-width: 1.7;
+  opacity: 0.92;
+}
+
+.month-label,
+.season-label,
+.desert-label,
+.baseball-label,
+.marker-label,
+.hub text {
+  pointer-events: none;
+}
+
+.month-label {
+  fill: var(--ink);
+  font-family: var(--body-font);
+  font-size: 12px;
+  font-weight: 730;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.season-arc {
+  opacity: 0.64;
+  stroke: color-mix(in srgb, var(--surface) 74%, transparent);
+  stroke-width: 1.5;
+}
+
+.theme-observatory .season-arc {
+  opacity: 0.42;
+  filter: saturate(1.25);
+}
+
+.theme-editorial .season-arc {
+  opacity: 0.76;
+}
+
+.season-art {
+  opacity: 0.34;
+}
+
+.season-pattern-line,
+.season-pattern-dot {
+  fill: var(--surface);
+  stroke: var(--surface);
+  stroke-width: 1;
+  opacity: 0.62;
+}
+
+.season-boundary {
+  stroke: var(--ink);
+  stroke-width: 0.9;
+  opacity: 0.62;
+}
+
+.season-label {
+  fill: color-mix(in srgb, var(--ink) 82%, transparent);
+  font-size: 10px;
+  font-weight: 700;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.climate-edge {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ink) 70%, transparent);
+  stroke-width: 1.15;
+}
+
+.evening-threshold {
+  fill: none;
+  stroke: color-mix(in srgb, var(--warm) 70%, transparent);
+  stroke-width: 0.9;
+  stroke-dasharray: 3 5;
+}
+
+.evening-rim {
+  fill: none;
+  stroke: var(--warm);
+  stroke-width: 2.4;
+  opacity: 0.72;
+}
+
+.actuals-trace {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  filter: url(#hand-glow);
+}
+
+.theme-editorial .actuals-trace {
+  filter: none;
+}
+
+.actuals-terminus {
+  fill: var(--ink);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.sports-intensity {
+  filter: url(#sports-glow);
+}
+
+.theme-editorial .sports-intensity,
+.theme-almanac .sports-intensity {
+  filter: none;
+}
+
+.league-arc {
+  stroke: color-mix(in srgb, var(--surface) 42%, transparent);
+  stroke-width: 0.6;
+}
+
+.league-arc--postseason,
+.league-arc--wildcard,
+.league-arc--divisional,
+.league-arc--conference {
+  filter: saturate(1.25);
+}
+
+.championship-node {
+  stroke: var(--surface);
+  stroke-width: 2;
+  filter: url(#hand-glow);
+}
+
+.theme-editorial .championship-node,
+.theme-almanac .championship-node {
+  filter: none;
+}
+
+.baseball-arc {
+  fill: color-mix(in srgb, var(--muted) 38%, transparent);
+}
+
+.desert-label,
+.baseball-label {
+  fill: var(--muted);
+  font-size: 7.8px;
+  font-weight: 650;
+  text-anchor: middle;
+}
+
+.baseball-label {
+  opacity: 0.65;
+}
+
+.event-marker {
+  cursor: pointer;
+  outline: none;
+}
+
+.marker-leader {
+  stroke: var(--muted);
+  stroke-width: 0.8;
+  opacity: 0.55;
+}
+
+.marker-glyph {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  transition: transform 140ms ease, fill 140ms ease;
+}
+
+.event-marker--holiday .marker-glyph {
+  fill: var(--accent);
+}
+
+.event-marker--golf .marker-glyph {
+  fill: #4f9a65;
+}
+
+.event-marker--astro .marker-glyph {
+  fill: var(--cool);
+}
+
+.event-marker--personal .marker-glyph {
+  fill: var(--accent-alt);
+}
+
+.event-marker:hover .marker-glyph,
+.event-marker:focus-visible .marker-glyph,
+.event-marker.is-selected .marker-glyph {
+  transform: scale(1.45);
+  fill: var(--ink);
+}
+
+.event-marker:focus-visible .marker-glyph {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.marker-approximate {
+  fill: var(--muted);
+}
+
+.marker-label {
+  fill: var(--ink);
+  font-size: 8.5px;
+  font-weight: 650;
+  dominant-baseline: middle;
+}
+
+.hand {
+  vector-effect: non-scaling-stroke;
+}
+
+.hand--ghost {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 7;
+  opacity: 0.45;
+}
+
+.hand--six {
+  opacity: 0.27;
+}
+
+.hand--now {
+  stroke: var(--accent);
+  stroke-width: 2.4;
+  filter: url(#hand-glow);
+}
+
+.theme-editorial .hand--now,
+.theme-almanac .hand--now {
+  filter: none;
+}
+
+.hand--scrub {
+  stroke: var(--accent-alt);
+  stroke-width: 1.4;
+  stroke-dasharray: 2 4;
+}
+
+.hub__outer {
+  fill: color-mix(in srgb, var(--surface) 94%, var(--background));
+  stroke: color-mix(in srgb, var(--accent) 64%, var(--line));
+  stroke-width: 1.4;
+}
+
+.hub__inner {
+  fill: color-mix(in srgb, var(--background) 83%, var(--surface));
+  stroke: color-mix(in srgb, var(--line) 38%, transparent);
+  stroke-width: 0.8;
+}
+
+.theme-editorial .hub__inner,
+.theme-almanac .hub__inner {
+  fill: color-mix(in srgb, var(--surface) 92%, var(--background));
+}
+
+.hub__progress-track,
+.hub__progress-value {
+  fill: none;
+  stroke-width: 4;
+}
+
+.hub__progress-track {
+  stroke: color-mix(in srgb, var(--line) 25%, transparent);
+}
+
+.hub__progress-value {
+  stroke: var(--accent);
+  stroke-linecap: round;
+}
+
+.hub text {
+  fill: var(--ink);
+  text-anchor: middle;
+}
+
+.hub__eyebrow {
+  fill: var(--muted) !important;
+  font-size: 9px;
+  font-weight: 680;
+}
+
+.hub__month {
+  font-family: var(--display-font);
+  font-size: 22px;
+  font-weight: 580;
+}
+
+.hub__day {
+  font-family: var(--display-font);
+  font-size: 61px;
+  font-variant-numeric: lining-nums;
+  font-weight: 520;
+}
+
+.hub__meta {
+  fill: var(--muted) !important;
+  font-size: 8.5px;
+  font-weight: 650;
+}
+
+.hub__personal-year {
+  fill: var(--accent-alt) !important;
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.hub__pin {
+  fill: var(--accent);
+  stroke: var(--surface);
+  stroke-width: 1.6;
+}
+
+.dial-key {
+  justify-content: center;
+  gap: 20px;
+  padding-top: 1px;
+}
+
+.dial-key span {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.dial-key i {
+  display: inline-block;
+  width: 19px;
+  height: 0;
+  border-top: 1px solid var(--muted);
+}
+
+.dial-key__threshold {
+  border-top: 1px dashed var(--warm) !important;
+}
+
+.dial-key__actual {
+  border-top: 2px solid var(--ink) !important;
+}
+
+.readout {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 24px 0 24px 30px;
+  border-left: 1px solid color-mix(in srgb, var(--line) 36%, transparent);
+}
+
+.readout__location {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 680;
+  text-transform: uppercase;
+}
+
+.selected-event {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1px 12px;
+  margin: 0 0 18px;
+  padding: 9px 0 9px 11px;
+  border-left: 3px solid var(--accent);
+}
+
+.selected-event span {
+  grid-row: 1 / 3;
+  align-self: center;
+  color: var(--accent);
+  font-size: 8px;
+  font-weight: 740;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.selected-event strong {
+  font-family: var(--display-font);
+  font-size: 17px;
+  font-weight: 620;
+}
+
+.selected-event small {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.readout__header p {
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 670;
+  text-transform: uppercase;
+}
+
+.readout__header h2 {
+  margin: 0;
+  font-family: var(--display-font);
+  font-size: 53px;
+  font-variant-numeric: lining-nums;
+  font-weight: 490;
+  line-height: 0.96;
+}
+
+.readout__header h2 span {
+  display: block;
+  font-size: 20px;
+  font-weight: 570;
+}
+
+.readout__season {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 10px;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.readout__season small {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 550;
+  text-align: right;
+  text-transform: none;
+}
+
+.season-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.season-dot--winter { background: #6f9aae; }
+.season-dot--spring { background: #73a86f; }
+.season-dot--summer { background: #e4b52c; }
+.season-dot--autumn { background: #bd5945; }
+
+.vibe-line {
+  margin: 18px 0 15px;
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-size: 19px;
+  font-weight: 470;
+  line-height: 1.22;
+}
+
+.data-list {
+  margin: 0;
+  border-top: 1px solid color-mix(in srgb, var(--line) 35%, transparent);
+}
+
+.data-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 24%, transparent);
+}
+
+.data-row dt {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 680;
+  text-transform: uppercase;
+}
+
+.data-row dt svg {
+  color: var(--accent);
+}
+
+.data-row dd {
+  min-width: 0;
+  margin: 0;
+  text-align: right;
+}
+
+.data-row strong,
+.data-row small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.data-row strong {
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.data-row small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 8.5px;
+  line-height: 1.35;
+}
+
+.readout__progress {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 9px;
+  align-items: center;
+  padding: 16px 0;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 690;
+  text-transform: uppercase;
+}
+
+.readout__progress strong {
+  color: var(--ink);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  height: 3px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--line) 30%, transparent);
+}
+
+.progress-track i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 650;
+  text-transform: uppercase;
+}
+
+.legend span {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.legend__line {
+  width: 13px;
+  height: 3px;
+}
+
+.legend__line--nfl { background: #3ab08a; }
+.legend__line--nba { background: #e27642; }
+.legend__line--nhl { background: #6598d0; }
+
+.legend__marker {
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.app-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  width: min(calc(100% - 64px), 1480px);
+  margin: -18px auto 0;
+  padding: 0 0 16px;
+  color: color-mix(in srgb, var(--muted) 72%, transparent);
+  font-size: 8px;
+  font-weight: 640;
+}
+
+@keyframes dial-arrive {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes dial-reconfigure {
+  0% { opacity: 1; transform: scale(1) rotate(0); }
+  38% { opacity: 0.44; transform: scale(0.22) rotate(13deg); }
+  50% { opacity: 0.18; transform: scale(0.16) rotate(-10deg); }
+  62% { opacity: 0.48; transform: scale(0.27) rotate(-6deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@media (max-width: 1120px) {
+  .instrument-layout {
+    grid-template-columns: minmax(500px, 1fr) 290px;
+    gap: 16px;
+    width: min(calc(100% - 32px), 1120px);
+  }
+
+  .readout {
+    padding-left: 22px;
+  }
+
+  .dial-frame {
+    width: min(100%, 720px, calc(100dvh - 150px));
+  }
+}
+
+@media (max-width: 860px) {
+  .app {
+    overflow: visible;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 20px 18px 8px;
+  }
+
+  .controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .instrument-layout {
+    grid-template-columns: 1fr;
+    width: min(calc(100% - 24px), 760px);
+    min-height: auto;
+    padding-top: 10px;
+  }
+
+  .dial-frame {
+    width: min(100%, 720px);
+  }
+
+  .readout {
+    width: 100%;
+    padding: 28px 8px 36px;
+    border-top: 1px solid color-mix(in srgb, var(--line) 36%, transparent);
+    border-left: 0;
+  }
+
+  .readout__header,
+  .vibe-line,
+  .data-list,
+  .readout__progress,
+  .legend,
+  .readout__location,
+  .selected-event {
+    width: min(100%, 560px);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .app-footer {
+    width: calc(100% - 36px);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .topbar {
+    padding-inline: 12px;
+  }
+
+  .brand__name {
+    font-size: 24px;
+  }
+
+  .controls {
+    gap: 5px;
+  }
+
+  .segmented-control button {
+    padding-inline: 7px;
+  }
+
+  .year-control__value {
+    min-width: 42px;
+  }
+
+  .dial-caption {
+    padding-inline: 8px;
+    font-size: 7.5px;
+  }
+
+  .dial-frame {
+    min-width: 0;
+  }
+
+  .dial-key {
+    gap: 9px;
+    font-size: 6.8px;
+  }
+
+  .dial-key i {
+    width: 11px;
+  }
+
+  .marker-label,
+  .desert-label,
+  .baseball-label {
+    display: none;
+  }
+
+  .readout__header h2 {
+    font-size: 46px;
+  }
+
+  .app-footer {
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+}
+
+@media (max-width: 390px) {
+  .segmented-control span {
+    display: none;
+  }
+
+  .theme-switcher {
+    padding-inline: 4px;
+  }
+
+  .dial-key {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+
+  .ambience-canvas {
+    display: none;
+  }
+}

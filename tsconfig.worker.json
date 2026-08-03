@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.worker.tsbuildinfo",
+    "target": "ES2022",
+    "lib": ["ES2022", "WebWorker"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "types": ["@cloudflare/workers-types"]
+  },
+  "include": [
+    "src/worker.ts",
+    "functions/**/*.ts",
+    "src/data/schemas.ts",
+    "src/data/sportsHeuristics.ts",
+    "src/time/calendar.ts",
+    "src/time/location.ts",
+    "src/time/rules.ts",
+    "src/time/apiDates.ts"
+  ]
+}
