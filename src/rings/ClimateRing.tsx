@@ -65,7 +65,7 @@ export function ClimateField({
     if (!canvas || sunDays.length === 0) {
       return;
     }
-    const resolution = Math.min(900, Math.max(480, Math.round(size * window.devicePixelRatio)));
+    const resolution = Math.min(2_048, Math.max(480, Math.round(size * window.devicePixelRatio)));
     canvas.width = resolution;
     canvas.height = resolution;
     const context = canvas.getContext('2d');

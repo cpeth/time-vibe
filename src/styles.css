@@ -78,7 +78,7 @@ button,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: min(100%, 1560px);
+  width: min(100%, 2920px);
   margin: 0 auto;
   padding: 22px 32px 12px;
 }
@@ -248,10 +248,10 @@ button,
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(540px, 1fr) 330px;
-  gap: 28px;
+  grid-template-columns: minmax(540px, 1fr) clamp(330px, 18vw, 660px);
+  gap: clamp(28px, 1.5vw, 56px);
   align-items: center;
-  width: min(calc(100% - 48px), 1480px);
+  width: min(calc(100% - 48px), 2800px);
   min-height: calc(100dvh - 132px);
   margin: 0 auto;
   padding: 4px 0 24px;
@@ -269,7 +269,7 @@ button,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: min(100%, 840px);
+  width: min(100%, 1680px);
   color: var(--muted);
   font-size: 9px;
   font-weight: 650;
@@ -293,7 +293,7 @@ button,
 }
 
 .dial-frame {
-  width: min(100%, 840px, calc(100dvh - 150px));
+  width: min(100%, 1680px, calc(100dvh - 150px));
   min-width: 360px;
   aspect-ratio: 1;
   animation: dial-arrive 850ms cubic-bezier(0.19, 1, 0.22, 1) both;
@@ -948,7 +948,7 @@ button,
   z-index: 2;
   display: flex;
   justify-content: space-between;
-  width: min(calc(100% - 64px), 1480px);
+  width: min(calc(100% - 64px), 2800px);
   margin: -18px auto 0;
   padding: 0 0 16px;
   color: color-mix(in srgb, var(--muted) 72%, transparent);
@@ -967,6 +967,425 @@ button,
   50% { opacity: 0.18; transform: scale(0.16) rotate(-10deg); }
   62% { opacity: 0.48; transform: scale(0.27) rotate(-6deg); }
   100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@media (min-width: 2000px) and (min-height: 1100px) {
+  .topbar {
+    padding: 30px 44px 16px;
+  }
+
+  .brand {
+    gap: 2px;
+  }
+
+  .brand__name {
+    font-size: 36px;
+  }
+
+  .brand__line {
+    font-size: 13px;
+  }
+
+  .controls {
+    gap: 13px;
+  }
+
+  .year-control,
+  .segmented-control,
+  .theme-switcher {
+    min-height: 46px;
+    padding: 4px;
+    border-radius: 7px;
+  }
+
+  .year-control__value {
+    min-width: 64px;
+    font-size: 15px;
+  }
+
+  .icon-button {
+    width: 41px;
+    height: 41px;
+  }
+
+  .segmented-control button {
+    gap: 8px;
+    min-height: 36px;
+    padding: 0 13px;
+    font-size: 14px;
+  }
+
+  .theme-switcher {
+    gap: 5px;
+    padding-inline: 9px;
+  }
+
+  .theme-swatch {
+    width: 26px;
+    height: 26px;
+  }
+
+  .theme-swatch::before {
+    width: 16px;
+    height: 16px;
+  }
+
+  .instrument-layout {
+    min-height: calc(100dvh - 170px);
+    padding-bottom: 32px;
+  }
+
+  .dial-frame {
+    width: min(100%, 1680px, calc(100dvh - 205px));
+  }
+
+  .dial-caption,
+  .dial-key {
+    font-size: 12px;
+  }
+
+  .dial-caption {
+    padding: 0 32px 4px;
+  }
+
+  .dial-key {
+    gap: 27px;
+  }
+
+  .dial-key i {
+    width: 25px;
+  }
+
+  .readout {
+    padding: 32px 0 32px 40px;
+  }
+
+  .readout__location {
+    gap: 8px;
+    margin-bottom: 29px;
+    font-size: 12px;
+  }
+
+  .selected-event {
+    gap: 2px 16px;
+    margin-bottom: 24px;
+    padding: 12px 0 12px 15px;
+    border-left-width: 4px;
+  }
+
+  .selected-event span,
+  .selected-event small {
+    font-size: 11px;
+  }
+
+  .selected-event strong {
+    font-size: 23px;
+  }
+
+  .readout__header p {
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  .readout__header h2 {
+    font-size: 70px;
+  }
+
+  .readout__header h2 span {
+    font-size: 27px;
+  }
+
+  .readout__season {
+    gap: 8px;
+    margin-top: 13px;
+    font-size: 13px;
+  }
+
+  .readout__season small {
+    font-size: 11px;
+  }
+
+  .season-dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .vibe-line {
+    margin: 24px 0 20px;
+    font-size: 25px;
+  }
+
+  .data-row {
+    grid-template-columns: 106px 1fr;
+    gap: 13px;
+    padding: 13px 0;
+  }
+
+  .data-row dt {
+    gap: 9px;
+    font-size: 12px;
+  }
+
+  .data-row strong {
+    font-size: 13px;
+  }
+
+  .data-row small {
+    margin-top: 3px;
+    font-size: 11px;
+  }
+
+  .readout__progress {
+    gap: 12px;
+    padding: 21px 0;
+    font-size: 11px;
+  }
+
+  .readout__progress strong {
+    font-size: 12px;
+  }
+
+  .progress-track {
+    height: 4px;
+  }
+
+  .legend {
+    gap: 16px;
+    font-size: 11px;
+  }
+
+  .legend span {
+    gap: 7px;
+  }
+
+  .legend__line {
+    width: 17px;
+    height: 4px;
+  }
+
+  .legend__marker {
+    width: 7px;
+    height: 7px;
+  }
+
+  .app-footer {
+    margin-top: -24px;
+    padding-bottom: 21px;
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 3200px) and (min-height: 1700px) {
+  .topbar {
+    padding: 44px 64px 24px;
+  }
+
+  .brand__name {
+    font-size: 52px;
+  }
+
+  .brand__line {
+    font-size: 18px;
+  }
+
+  .controls {
+    gap: 20px;
+  }
+
+  .year-control,
+  .segmented-control,
+  .theme-switcher {
+    min-height: 66px;
+    padding: 6px;
+    border-width: 2px;
+    border-radius: 10px;
+  }
+
+  .year-control__value {
+    min-width: 90px;
+    font-size: 22px;
+  }
+
+  .icon-button {
+    width: 58px;
+    height: 58px;
+  }
+
+  .segmented-control button {
+    gap: 11px;
+    min-height: 52px;
+    padding: 0 20px;
+    border-radius: 7px;
+    font-size: 20px;
+  }
+
+  .theme-switcher {
+    gap: 8px;
+    padding-inline: 13px;
+  }
+
+  .theme-swatch {
+    width: 36px;
+    height: 36px;
+    border-width: 3px;
+  }
+
+  .theme-swatch::before {
+    width: 23px;
+    height: 23px;
+  }
+
+  .instrument-layout {
+    min-height: calc(100dvh - 250px);
+    padding-bottom: 48px;
+  }
+
+  .dial-frame {
+    width: min(100%, 1680px, calc(100dvh - 290px));
+  }
+
+  .dial-caption,
+  .dial-key {
+    font-size: 18px;
+  }
+
+  .dial-caption {
+    padding: 0 48px 6px;
+  }
+
+  .source-status {
+    padding: 4px 9px;
+    border-width: 2px;
+    border-radius: 5px;
+  }
+
+  .dial-key {
+    gap: 40px;
+  }
+
+  .dial-key i {
+    width: 38px;
+    border-top-width: 2px;
+  }
+
+  .readout {
+    padding: 48px 0 48px 60px;
+    border-left-width: 2px;
+  }
+
+  .readout__location {
+    gap: 12px;
+    margin-bottom: 44px;
+    font-size: 18px;
+  }
+
+  .selected-event {
+    gap: 3px 24px;
+    margin-bottom: 36px;
+    padding: 18px 0 18px 22px;
+    border-left-width: 6px;
+  }
+
+  .selected-event span,
+  .selected-event small {
+    font-size: 16px;
+  }
+
+  .selected-event strong {
+    font-size: 34px;
+  }
+
+  .readout__header p {
+    margin-bottom: 6px;
+    font-size: 20px;
+  }
+
+  .readout__header h2 {
+    font-size: 104px;
+  }
+
+  .readout__header h2 span {
+    font-size: 40px;
+  }
+
+  .readout__season {
+    gap: 12px;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+
+  .readout__season small {
+    font-size: 16px;
+  }
+
+  .season-dot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .vibe-line {
+    margin: 36px 0 30px;
+    font-size: 38px;
+  }
+
+  .data-row {
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .data-row dt {
+    gap: 14px;
+    font-size: 18px;
+  }
+
+  .data-row strong {
+    font-size: 20px;
+  }
+
+  .data-row small {
+    margin-top: 4px;
+    font-size: 17px;
+  }
+
+  .readout__progress {
+    gap: 18px;
+    padding: 32px 0;
+    font-size: 16px;
+  }
+
+  .readout__progress strong {
+    font-size: 18px;
+  }
+
+  .progress-track {
+    height: 6px;
+  }
+
+  .legend {
+    gap: 24px;
+    font-size: 16px;
+  }
+
+  .legend span {
+    gap: 10px;
+  }
+
+  .legend__line {
+    width: 26px;
+    height: 6px;
+  }
+
+  .legend__marker {
+    width: 10px;
+    height: 10px;
+  }
+
+  .app-footer {
+    margin-top: -36px;
+    padding-bottom: 32px;
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 1120px) {
